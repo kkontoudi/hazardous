@@ -332,6 +332,7 @@ class SurvivalBoost(BaseEstimator, ClassifierMixin):
         n_iter_before_feedback=20,
         random_state=None,
         n_horizons_per_observation=3,
+        categorical_features="from_dtype",
     ):
         self.hard_zero_fraction = hard_zero_fraction
         self.n_iter = n_iter
@@ -346,6 +347,7 @@ class SurvivalBoost(BaseEstimator, ClassifierMixin):
         self.ipcw_strategy = ipcw_strategy
         self.random_state = random_state
         self.n_horizons_per_observation = n_horizons_per_observation
+        self.categorical_features = categorical_features
 
     def fit(self, X, y, times=None):
         """Fit the model.
@@ -581,6 +583,7 @@ class SurvivalBoost(BaseEstimator, ClassifierMixin):
             max_leaf_nodes=self.max_leaf_nodes,
             max_depth=self.max_depth,
             min_samples_leaf=self.min_samples_leaf,
+            categorical_features=self.categorical_features,
         )
 
     def score(self, X, y):
